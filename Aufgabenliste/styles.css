@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+h1 {
+    text-align: center;
+}
+.task-list, .task-item {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+.task-item.overdue {
+    border-color: red;
+    background-color: #ffe5e5;
+}
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.buttons button {
+    padding: 5px 10px;
+    cursor: pointer;
+}

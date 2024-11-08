@@ -1,15 +1,6 @@
-// Aufgabe-Datenstruktur definieren
-interface Task {
-    title: string;
-    date: string;
-    time: string;
-    person: string;
-    comment: string;
-    inProgress: boolean;
-}
-
+"use strict";
 // Beispielhafte Aufgabenliste direkt in TypeScript
-const tasks: Task[] = [
+const tasks = [
     {
         title: "🧹 Kloputzen",
         date: "2023-10-31",
@@ -19,15 +10,13 @@ const tasks: Task[] = [
         inProgress: false
     }
 ];
-
 document.addEventListener('DOMContentLoaded', () => {
-    const addTaskBtn = document.getElementById('add-task-btn') as HTMLButtonElement;
-    const taskList = document.getElementById('task-list') as HTMLUListElement;
-
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskList = document.getElementById('task-list');
     // Funktion zum Rendern der Aufgaben
-    function renderTasks(): void {
-        taskList.innerHTML = ''; 
-        tasks.forEach((task: Task) => {
+    function renderTasks() {
+        taskList.innerHTML = '';
+        tasks.forEach((task) => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <h2>🔖 ${task.title}</h2>
@@ -41,13 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
             taskList.appendChild(li);
         });
     }
-
     // Aufgaben beim Laden der Seite rendern
     renderTasks();
-
     // Event Listener für das Hinzufügen einer neuen Aufgabe
     addTaskBtn.addEventListener('click', () => {
-        const newTask: Task = {
+        const newTask = {
             title: "🌈 Neue Aufgabe",
             date: "2023-11-01",
             time: "18:00",
@@ -59,29 +46,29 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks();
         console.log("Neue Aufgabe hinzugefügt");
     });
-
     // Event Listener für die Bearbeitung und das Löschen von Aufgaben
-    taskList.addEventListener('click', (event: Event) => {
-        const target = event.target as HTMLElement;
+    taskList.addEventListener('click', (event) => {
+        const target = event.target;
         if (target.classList.contains('edit-btn')) {
             console.log("Aufgabe bearbeiten");
-        } else if (target.classList.contains('delete-btn')) {
+        }
+        else if (target.classList.contains('delete-btn')) {
             const li = target.closest('li');
-            const index = Array.from(taskList.children).indexOf(li!);
+            const index = Array.from(taskList.children).indexOf(li);
             tasks.splice(index, 1);
             renderTasks();
             console.log("Aufgabe gelöscht");
         }
     });
-
     // Event Listener für "In Bearbeitung"-Checkbox
-    taskList.addEventListener('change', (event: Event) => {
-        const target = event.target as HTMLInputElement;
+    taskList.addEventListener('change', (event) => {
+        const target = event.target;
         if (target.classList.contains('in-progress')) {
             const li = target.closest('li');
-            const index = Array.from(taskList.children).indexOf(li!);
+            const index = Array.from(taskList.children).indexOf(li);
             tasks[index].inProgress = target.checked;
             console.log("Aufgabe ist in Bearbeitung:", target.checked);
         }
     });
 });
+//# sourceMappingURL=app.js.map

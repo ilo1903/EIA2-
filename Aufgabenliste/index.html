@@ -3,57 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aufgabenliste App</title>
+    <title>Aufgabenliste ✨</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="./app.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
-
-    <h1>Aufgabenliste App</h1>
-    <button onclick="addTask()">Neue Aufgabe hinzufügen</button>
-
-    <div id="task-list" class="task-list">
-        <!-- Platzhalteraufgaben -->
-        <div class="task-item" id="task-1">
-            <p><strong>Aufgabe:</strong> Kloputzen</p>
-            <p><strong>Deadline:</strong> Morgen 20:00</p>
-            <p><strong>Bearbeiter:</strong> Lydia</p>
-            <p><strong>Status:</strong> Offen</p>
-            <p><strong>Kommentar:</strong> die große Bürste benutzen</p>
-            <div class="buttons">
-                <button onclick="editTask('task-1')">Bearbeiten</button>
-                <button onclick="markInProgress('task-1')">In Bearbeitung</button>
-                <button onclick="deleteTask('task-1')">Löschen</button>
-            </div>
-        </div>
-
-        <div class="task-item overdue" id="task-2">
-            <p><strong>Aufgabe:</strong> Abwasch</p>
-            <p><strong>Deadline:</strong> Heute 18:00</p>
-            <p><strong>Bearbeiter:</strong> Kevin</p>
-            <p><strong>Status:</strong> Überfällig</p>
-            <p><strong>Kommentar:</strong> Nicht vergessen, Spülmittel aufzufüllen</p>
-            <div class="buttons">
-                <button onclick="editTask('task-2')">Bearbeiten</button>
-                <button onclick="markInProgress('task-2')">In Bearbeitung</button>
-                <button onclick="deleteTask('task-2')">Löschen</button>
-            </div>
-        </div>
-
-        <div class="task-item" id="task-3">
-            <p><strong>Aufgabe:</strong> Müll rausbringen</p>
-            <p><strong>Deadline:</strong> Heute 22:00</p>
-            <p><strong>Bearbeiter:</strong> Oliver</p>
-            <p><strong>Status:</strong> Offen</p>
-            <p><strong>Kommentar:</strong> Restmüll und Papier getrennt rausbringen</p>
-            <div class="buttons">
-                <button onclick="editTask('task-3')">Bearbeiten</button>
-                <button onclick="markInProgress('task-3')">In Bearbeitung</button>
-                <button onclick="deleteTask('task-3')">Löschen</button>
-            </div>
-        </div>
+    <div class="container">
+        <h1>📝 Aufgabenliste ✨</h1>
+        <button id="add-task-btn">🌈 Aufgabe hinzufügen</button>
+        <ul id="task-list">
+            <!-- Dynamisch generierte Aufgaben erscheinen hier -->
+        </ul>
     </div>
-
-    <script src="scripts.js"></script>
 </body>
 </html>

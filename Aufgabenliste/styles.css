@@ -1,29 +1,80 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #ffe4e1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-h1 {
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffb6c1;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
-.task-list, .task-item {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+
+h1 {
+    color: #ff69b4;
+}
+
+button {
     padding: 10px;
-    background-color: #fff;
-}
-.task-item.overdue {
-    border-color: red;
-    background-color: #ffe5e5;
-}
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-.buttons button {
-    padding: 5px 10px;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    background-color: #ffe4e1;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff69b4;
+    color: white;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    border-bottom: 1px solid #ffc0cb;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+li h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+li p {
+    margin: 5px 0;
+}
+
+.edit-btn, .delete-btn {
+    margin-right: 5px;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    border-radius: 4px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    background-color: #ff1493;
+}
+
+.in-progress {
+    margin-left: 10px;
 }

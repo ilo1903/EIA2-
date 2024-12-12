@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#farm-status {
+    background-color: #d4e6a5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#next-day-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+#next-day-button:hover {
+    background-color: #45a049;
+}
+
+#animal-songs {
+    background-color: #e6e6fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.animal-song {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.supply-list-item {
+    list-style-type: none;
+}

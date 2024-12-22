@@ -6,136 +6,106 @@ if (!ctx) {
 }
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// ** Hilfsfunktion für Zufallszahlen **
+// Zufallszahl zwischen zwei Werten
 const random = (min, max) => Math.random() * (max - min) + min;
-// ** Hintergrund mit Farbverlauf **
-function drawBackground() {
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, '#87CEEB'); // Himmelblau
-    gradient.addColorStop(1, '#f0f8ff'); // Schneeweiß
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-// ** Zeichnet den Baum **
-function drawTree(x, y) {
-    ctx.fillStyle = '#8B4513';
-    ctx.fillRect(x - 25, y, 50, 200);
-    ctx.beginPath();
-    ctx.moveTo(x - 100, y);
-    ctx.lineTo(x + 100, y);
-    ctx.lineTo(x, y - 200);
-    ctx.closePath();
-    ctx.fillStyle = 'green';
-    ctx.fill();
-}
-// ** Zeichnet das Vogelhäuschen auf dem Boden **
-function drawBirdhouse(x, y) {
-    ctx.fillStyle = '#A0522D';
-    ctx.fillRect(x, y, 80, 100);
-    // Dach
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 40, y - 40);
-    ctx.lineTo(x + 80, y);
-    ctx.closePath();
-    ctx.fillStyle = '#8B0000';
-    ctx.fill();
-    // Eingang
-    ctx.beginPath();
-    ctx.arc(x + 40, y + 40, 20, 0, Math.PI * 2);
-    ctx.fillStyle = 'black';
-    ctx.fill();
-    // Holzsockel
-    ctx.fillStyle = '#8B4513';
-    ctx.fillRect(x + 30, y + 100, 20, 50);
-}
-// ** Zeichnet den Schneemann **
-function drawSnowman(x, y) {
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(x, y, 40, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(x, y - 55, 30, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(x, y - 100, 20, 0, Math.PI * 2);
-    ctx.fill();
-    // Augen
-    ctx.fillStyle = 'black';
-    ctx.beginPath();
-    ctx.arc(x - 7, y - 105, 3, 0, Math.PI * 2);
-    ctx.arc(x + 7, y - 105, 3, 0, Math.PI * 2);
-    ctx.fill();
-    // Mund
-    ctx.beginPath();
-    ctx.arc(x, y - 95, 10, 0, Math.PI);
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    // Karottennase
-    ctx.fillStyle = 'orange';
-    ctx.beginPath();
-    ctx.moveTo(x, y - 100);
-    ctx.lineTo(x + 20, y - 97);
-    ctx.lineTo(x, y - 95);
-    ctx.closePath();
-    ctx.fill();
-}
-// ** Zeichnet Vögel **
-function drawBird(x, y) {
-    ctx.fillStyle = `hsl(${random(0, 360)}, 70%, 50%)`;
-    // Körper
-    ctx.beginPath();
-    ctx.arc(x, y, 15, 0, Math.PI * 2);
-    ctx.fill();
-    // Flügel
-    ctx.fillStyle = 'black';
-    ctx.beginPath();
-    ctx.ellipse(x - 10, y, 10, 6, Math.PI / 4, 0, Math.PI * 2);
-    ctx.fill();
-    // Auge
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(x + 5, y - 5, 3, 0, Math.PI * 2);
-    ctx.fill();
-    // Schnabel
-    ctx.fillStyle = 'orange';
-    ctx.beginPath();
-    ctx.moveTo(x + 10, y);
-    ctx.lineTo(x + 20, y - 5);
-    ctx.lineTo(x + 10, y + 5);
-    ctx.closePath();
-    ctx.fill();
-}
-// ** Zeichnet den Schnee **
-function drawSnowflakes() {
-    for (let i = 0; i < 100; i++) {
+// Hintergrundbild speichern
+let backgroundImage;
+// Klasse: Vogel
+class Bird {
+    constructor(x, y, isFlying) {
+        this.x = x;
+        this.y = y;
+        this.isFlying = isFlying;
+        this.speedX = random(-2, 2);
+        this.speedY = isFlying ? random(-1, 1) : 0;
+    }
+    draw() {
+        ctx.fillStyle = 'red';
         ctx.beginPath();
-        ctx.arc(random(0, canvas.width), random(0, canvas.height - 200), random(2, 5), 0, Math.PI * 2);
-        ctx.fillStyle = 'white';
+        ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
         ctx.fill();
     }
+    update() {
+        if (this.isFlying) {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0)
+                this.x = canvas.width;
+            if (this.x > canvas.width)
+                this.x = 0;
+            if (this.y < 0)
+                this.y = canvas.height;
+            if (this.y > canvas.height)
+                this.y = 0;
+        }
+    }
 }
-// ** Hauptfunktion zur Erstellung der Szene **
-function drawScene() {
-    drawBackground();
+// Klasse: Schneeflocke
+class Snowflake {
+    constructor() {
+        this.x = random(0, canvas.width);
+        this.y = random(0, canvas.height);
+        this.size = random(2, 5);
+        this.speed = random(1, 3);
+    }
+    draw() {
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = random(0, canvas.width);
+        }
+    }
+}
+// Hintergrund zeichnen und speichern
+function drawBackground() {
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
-    drawTree(150, canvas.height - 300);
-    drawBirdhouse(500, canvas.height - 250);
-    drawSnowman(canvas.width / 2, canvas.height - 120);
-    for (let i = 0; i < 20; i++) {
-        drawBird(random(0, canvas.width), random(50, canvas.height - 200));
-    }
-    drawSnowflakes();
+    backgroundImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
-// Passt die Canvas-Größe an, wenn das Fenster geändert wird
+// Objekte für Animation
+const birds = [];
+const snowflakes = [];
+// Szene initialisieren
+function initializeScene() {
+    for (let i = 0; i < 10; i++) {
+        birds.push(new Bird(random(0, canvas.width), random(0, canvas.height - 100), true));
+    }
+    for (let i = 0; i < 100; i++) {
+        snowflakes.push(new Snowflake());
+    }
+}
+// Animationsschleife
+function animate() {
+    ctx.putImageData(backgroundImage, 0, 0);
+    // Schneeflocken zeichnen
+    snowflakes.forEach(snowflake => {
+        snowflake.update();
+        snowflake.draw();
+    });
+    // Vögel zeichnen
+    birds.forEach(bird => {
+        bird.update();
+        bird.draw();
+    });
+    requestAnimationFrame(animate);
+}
+// Event: Fenstergröße ändern
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    drawScene();
+    drawBackground();
+    initializeScene();
 });
-// Zeichnet die Szene beim Laden
-drawScene();
+// Starten
+drawBackground();
+initializeScene();
+animate();
 //# sourceMappingURL=script.js.map

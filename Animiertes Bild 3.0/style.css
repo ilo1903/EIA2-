@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #cce7ff; /* Winterlicher Himmel */
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
